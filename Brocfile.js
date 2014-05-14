@@ -19,7 +19,7 @@ var camelize = function(str) {
 };
 
 require('matchdep').filterDev('broccoli-*').forEach(function(p, idx) {
-  if (['broccoli-cli'].indexOf(p) < 0) {
+  if (['broccoli-cli', 'broccoli-timepiece'].indexOf(p) < 0) {
     plugins[camelize(p)] = require(p);
   }
 });
