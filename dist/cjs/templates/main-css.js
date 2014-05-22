@@ -6,6 +6,6 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 
 
-  data.buffer.push("ella-sample {\n  color: #121212; }\n  ella-sample.activated {\n    color: green;\n    font-weight: bold; }\n");
+  data.buffer.push("ella-sample {\n  background-color: transparent;\n  color: black; }\n  ella-sample.activated {\n    background-color: transparent;\n    color: green; }\n");
   
 });
