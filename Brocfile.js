@@ -78,14 +78,7 @@ pkg = preprocess(pkg);
 
 // module.exports = pkg; return; // Stop here to inspect package structure
 
-var outputJs = plugins.distEs6Module(pkg, {
-  global: 'Emberella.sample',
-  packageName: 'ella-sample',
-  main: 'main',
-  shim: {
-    'ember': 'Ember'
-  }
-});
+var outputJs = plugins.distEs6Module(pkg, require('./output'));
 
 // Watch the examples directory in development
 if (env === 'development') {
