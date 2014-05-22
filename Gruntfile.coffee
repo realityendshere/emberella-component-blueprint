@@ -1,5 +1,5 @@
 config = (name) ->
-  require('./tasks/config/' + name)
+  require('./tasks/grunt/' + name)
 
 module.exports = (grunt) ->
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
@@ -14,9 +14,9 @@ module.exports = (grunt) ->
   # load local tasks
   grunt.task.loadTasks('./tasks')
 
-  grunt.registerTask('broccoli_develop', [
+  grunt.registerTask('broccoli_production_test', [
     'clean:build'
-    'broccoli:develop:build'
+    'broccoli:production_test:build'
   ])
 
   grunt.registerTask('broccoli_dist', [
@@ -25,7 +25,7 @@ module.exports = (grunt) ->
   ])
 
   grunt.registerTask('test', [
-    'broccoli_develop'
+    'broccoli_production_test'
     'testem:ci:build'
     'clean:build'
   ])
