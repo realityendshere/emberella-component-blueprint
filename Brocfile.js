@@ -87,4 +87,9 @@ var outputJs = plugins.distEs6Module(pkg, {
   }
 });
 
+// Watch the examples directory in development
+if (env === 'development') {
+  outputJs = plugins.mergeTrees([outputJs, examples]);
+}
+
 module.exports = outputJs;
