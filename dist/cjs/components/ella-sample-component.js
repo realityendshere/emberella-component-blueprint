@@ -14,7 +14,7 @@ EllaSampleComponent = {
   classNameBindings: ['activated'],
   click: function() {
     set(this, 'activated', !get(this, 'activated'));
-    return this.incrementProperty('tests');
+    this.incrementProperty('tests');
   },
   activated: false,
   tests: 0

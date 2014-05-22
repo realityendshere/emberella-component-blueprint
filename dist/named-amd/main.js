@@ -17,7 +17,7 @@ define("ella-sample/components/ella-sample-component",
       classNameBindings: ['activated'],
       click: function() {
         set(this, 'activated', !get(this, 'activated'));
-        return this.incrementProperty('tests');
+        this.incrementProperty('tests');
       },
       activated: false,
       tests: 0
@@ -32,14 +32,14 @@ define("ella-sample",
     var EllaSampleComponent = __dependency1__["default"] || __dependency1__;
     var EllaSampleTemplate = __dependency2__["default"] || __dependency2__;
     var Application = __dependency3__.Application;
+
     Application.initializer({
       name: 'ella-sample',
       initialize: function(container) {
         container.register('component:ella-sample', EllaSampleComponent);
-        return container.register('template:components/ella-sample-css', EllaSampleTemplate);
+        container.register('template:components/ella-sample-css', EllaSampleTemplate);
       }
     });
-
 
     __exports__.EllaSampleComponent = EllaSampleComponent;
   });

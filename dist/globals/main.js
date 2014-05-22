@@ -15,7 +15,7 @@ EllaSampleComponent = {
   classNameBindings: ['activated'],
   click: function() {
     set(this, 'activated', !get(this, 'activated'));
-    return this.incrementProperty('tests');
+    this.incrementProperty('tests');
   },
   activated: false,
   tests: 0
@@ -27,14 +27,14 @@ exports["default"] = Component.extend(EllaSampleComponent);
 var EllaSampleComponent = _dereq_("./components/ella-sample-component")["default"] || _dereq_("./components/ella-sample-component");
 var EllaSampleTemplate = _dereq_("./templates/main-css")["default"] || _dereq_("./templates/main-css");
 var Application = window.Ember.Application;
+
 Application.initializer({
   name: 'ella-sample',
   initialize: function(container) {
     container.register('component:ella-sample', EllaSampleComponent);
-    return container.register('template:components/ella-sample-css', EllaSampleTemplate);
+    container.register('template:components/ella-sample-css', EllaSampleTemplate);
   }
 });
-
 
 exports.EllaSampleComponent = EllaSampleComponent;
 },{"./components/ella-sample-component":1,"./templates/main-css":3}],3:[function(_dereq_,module,exports){
