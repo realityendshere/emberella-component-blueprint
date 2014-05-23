@@ -62,6 +62,8 @@ styles = plugins.sass([styles], 'styles/main.scss', 'templates/main-css.css');
 // Autoprefixer adds and removes vendor prefixes from stylesheets as needed
 styles = plugins.autoprefixer(styles, {});
 
+styles = plugins.csso(styles, {});
+
 // We're using ic-styles, a strategy that injects component styles only when
 // this component is used
 styles = plugins.fileMover(styles, {
@@ -82,7 +84,40 @@ var outputJs = plugins.distEs6Module(pkg, require('./output'));
 
 // Watch the examples directory in development
 if (env === 'development') {
-  outputJs = plugins.mergeTrees([outputJs, examples]);
+  var bowerFiles = [
+    plugins.staticCompiler('bower_components/jquery/dist', {
+      files: ['jquery.js'],
+      srcDir: '/',
+      destDir: '/bower_components/jquery/dist'
+    }),
+
+    plugins.staticCompiler('bower_components/handlebars', {
+      files: ['handlebars.js'],
+      srcDir: '/',
+      destDir: '/bower_components/handlebars'
+    }),
+
+    plugins.staticCompiler('bower_components/ember', {
+      files: ['ember.js'],
+      srcDir: '/',
+      destDir: '/bower_components/ember/'
+    }),
+
+    plugins.staticCompiler('bower_components/ic-styled', {
+      files: ['main.js'],
+      srcDir: '/',
+      destDir: '/bower_components/ic-styled'
+    })
+  ];
+
+  bowerFiles = plugins.mergeTrees(bowerFiles);
+
+  examples = plugins.staticCompiler(examples, {
+    srcDir: '/',
+    destDir: '/examples'
+  });
+
+  outputJs = plugins.mergeTrees([outputJs, examples, bowerFiles]);
 }
 
 module.exports = outputJs;
