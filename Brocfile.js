@@ -1,12 +1,13 @@
 // An object for keeping references to Broccoli plugins
 var plugins = process.plugins = {};
 
-var config = function(name) {
-  return require('./tasks/broccoli/' + name);
+// Load build instructions from recipes directory
+var recipe = function(name) {
+  return require('./recipes/broccoli/' + name);
 };
 
 // Convert Broccoli plugin names into camelized strings
-var camelize = config('camelize');
+var camelize = recipe('camelize');
 
 // Looks at dependencies specified in package.json, requires broccoli plugins
 // and adds them to the plugins object.
@@ -18,26 +19,27 @@ require('matchdep').filterDev('broccoli-*').forEach(function(p, idx) {
 });
 
 var lib = 'lib',
-    styles = config('styles')('styles'),
+    styles = recipe('styles')('styles'),
     examples = 'examples',
     env = plugins.env.getEnv(),
     sourceTrees,
-    pkg;
+    pkg,
+    outputJs;
 
 // Combine code and styles into a single tree
 sourceTrees = [lib, styles];
 pkg = new plugins.mergeTrees(sourceTrees, { overwrite: true });
 
 // Compile all the things!
-pkg = config('preprocess')(pkg);
+pkg = recipe('preprocess')(pkg);
 
 // module.exports = pkg; return; // Stop here to inspect package structure
 
-var outputJs = config('dist_es6_module')(pkg);
+outputJs = recipe('dist_es6_module')(pkg);
 
 // Watch the examples directory in development
 if (env === 'development') {
-  outputJs = plugins.mergeTrees([outputJs, config('examples')(examples), config('bower')()]);
+  outputJs = plugins.mergeTrees([outputJs, recipe('examples')(examples), recipe('bower')()]);
 }
 
 module.exports = outputJs;
