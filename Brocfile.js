@@ -1,9 +1,9 @@
 // An object for keeping references to Broccoli plugins
 var plugins = process.plugins = {};
 
-// Load build instructions from recipes directory
+// Load build instructions from "tasks" directory
 var recipe = function(name) {
-  return require('./recipes/broccoli/' + name);
+  return require('./tasks/broccoli/' + name);
 };
 
 // Convert Broccoli plugin names into camelized strings

@@ -1,5 +1,5 @@
-# Load task config from recipes directory
-recipe = (name) -> require('./recipes/grunt/' + name)
+# Load task config from "tasks" directory
+recipe = (name) -> require('./tasks/grunt/' + name)
 
 module.exports = (grunt) ->
 
