@@ -43,13 +43,6 @@ var lib = 'lib',
     pkg,
     css;
 
-// Grab a reference to the 'lib' directory. This is where all the component
-// code should be developed
-lib = plugins.staticCompiler(lib, {
-  srcDir: '/',
-  destDir: '/'
-});
-
 // Prepare styles located in the "styles" directory
 styles = plugins.staticCompiler(styles, {
   srcDir: '/',
